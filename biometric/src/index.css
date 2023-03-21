@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, li, ul, ol{
+  color: #fff;
+}
+
+a,
+u {
+  text-decoration: none;
+}
+
+/* unvisited link */
+a:link {
+  color: #EE3EC9;
+}
+
+/* visited link */
+a:visited {
+  color: #EE3EC9;
+}
+
+/* mouse over link */
+a:hover {
+  color: #EE3EC9;
+}
+
+/* selected link */
+a:active {
+  color: #EE3EC9;
+}
