@@ -36,6 +36,7 @@ import { increment, doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import UserVerification from "../../components/userVerification/UserVerification";
 import { useDatabase } from "../../hooks/useDatabase";
+import { useNavigate } from "react-router-dom";
 
 // components
 import DropShadowBox from "../../components/DropShadowBox";
@@ -48,6 +49,8 @@ export default function HomePage() {
     setUser(user);
     setAuthUser(authUser);
   };
+
+  const navigate = useNavigate();
 
   return (
     <UserVerification onUser={setUserVerified}>

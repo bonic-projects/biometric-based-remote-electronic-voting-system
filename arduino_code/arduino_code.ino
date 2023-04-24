@@ -129,7 +129,7 @@ void loop() {
       sendLastSeenAndStatusTofirebase(uid, "User not enrolled");
     } else if (fingerID != -1) {
       // RGB led
-      printDisplay("Getting usner");
+      printDisplay("Getting user");
 
       //Firebase
       sendAttendanceTofirebase(uid, fingerID);
@@ -218,7 +218,7 @@ int getFingerprintIDez() {
 
 String getNameFromFId(String uid, int fingerID) {
   String path = "/biometricScanners/";
-  path += uid;
+  path += uid;o
   path += "/data/";
   path += fingerID;
 

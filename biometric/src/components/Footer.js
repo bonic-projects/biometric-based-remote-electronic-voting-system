@@ -53,7 +53,7 @@ export default function Footer() {
             align={isSmall ? "center" : "right"}
             gutterBottom
           >
-            By Muhammed Azhar
+           Copyright © 2023
           </Typography>
         </Container>
       </Box>

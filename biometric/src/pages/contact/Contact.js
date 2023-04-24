@@ -58,8 +58,7 @@ export default function Contact() {
           padding: "1rem",
         }}
       >
-        Fill the below fomr to contact us reagrding
-        technical/registration/payment related issues.
+        Fill the below form to contact us.
       </Typography>
       <Form onSubmit={save} />
       <Snackbar

@@ -32,6 +32,8 @@ import { useNavigate } from "react-router-dom";
 // ];
 
 export default function Header() {
+  const navigate = useNavigate();
+
   // const [open, setOpen] = useState(false);
 
   // const location = useLocation();
@@ -68,6 +70,54 @@ export default function Header() {
               {/* {isPending ? "Loading.." : "Login"} */}
             </Button>
           )}
+          <Box 
+          sx={{
+            width: 10,
+          }}
+          ></Box>
+           {user && (
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => navigate("/booth_view")}
+              sx={{
+                marginRight: "30px",
+                cursor: "pointer",
+              }}
+            >
+              Booths
+              {/* {isPending ? "Loading.." : "Login"} */}
+            </Button>
+          )}
+            {user && (
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => navigate("/booth_create")}
+              sx={{
+                marginRight: "30px",
+                cursor: "pointer",
+              }}
+            >
+              Create booth
+            </Button>
+          )}
+           {user && (
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => navigate("/election")}
+              sx={{
+                marginRight: "30px",
+                cursor: "pointer",
+              }}
+            >
+              Election
+              {/* {isPending ? "Loading.." : "Login"} */}
+            </Button>
+          )}
+
+
           {user && <AccountMenu user={user} />}
           {/* <Hidden mdDown>
             {navigationLinks.map((link) => (

@@ -16,6 +16,9 @@ import Register from "./pages/register/Register";
 import Settings from "./pages/settings/Settings";
 import Contact from "./pages/contact/Contact";
 import Admin from "./pages/admin/Admin";
+import BoothCreate from "./pages/booth_create/BoothCreate";
+import BoothList from "./pages/booth_view/BoothView";
+import ElectionStartPage from "./pages/start_election/StartElection";
 
 let theme = createTheme({
   palette: {
@@ -78,6 +81,18 @@ function App() {
                   element={user ? <Admin /> : <Navigate to="/" />}
                 />
                 <Route path="/contact" element={<Contact />} />
+                <Route
+                  path="/booth_create"
+                  element={user ? <BoothCreate /> : <Navigate to="/" />}
+                />
+                <Route
+                  path="/booth_view"
+                  element={user ? <BoothList /> : <Navigate to="/" />}
+                />
+                <Route
+                  path="/election"
+                  element={user ? <ElectionStartPage /> : <Navigate to="/" />}
+                />
               </Routes>
             </Layout>
           </BrowserRouter>
