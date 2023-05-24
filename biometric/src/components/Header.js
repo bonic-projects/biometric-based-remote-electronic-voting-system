@@ -116,6 +116,32 @@ export default function Header() {
               {/* {isPending ? "Loading.." : "Login"} */}
             </Button>
           )}
+          {user && (
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => navigate("/election_create")}
+              sx={{
+                marginRight: "30px",
+                cursor: "pointer",
+              }}
+            >
+              Create Election
+            </Button>
+          )}
+          {user && (
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => navigate("/enrollment")}
+              sx={{
+                marginRight: "30px",
+                cursor: "pointer",
+              }}
+            >
+              User Enrollment
+            </Button>
+          )}
 
 
           {user && <AccountMenu user={user} />}

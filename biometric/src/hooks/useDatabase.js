@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { rtdb } from "../firebase/config";
 import { ref, onValue } from "firebase/database";
 
-export const useDatabase = (c, id) => {
+export const useDatabase = (c) => {
   const [value, setDocument] = useState(null);
   const [error, setError] = useState(null);
 
   // realtime document data
   useEffect(() => {
-    if (id) {
-      const rtdbRef = ref(rtdb, c + "/" + id);
+    if (c) {
+      const rtdbRef = ref(rtdb, c);
       console.log(rtdbRef);
       const unsubscribe = onValue(
         rtdbRef,
@@ -28,7 +28,7 @@ export const useDatabase = (c, id) => {
     } else {
       setError("No id");
     }
-  }, [c, id]);
+  }, [c]);
 
   return { value, error };
 };

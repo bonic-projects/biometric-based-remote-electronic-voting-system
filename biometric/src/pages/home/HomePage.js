@@ -61,7 +61,7 @@ export default function HomePage() {
       )}
       <Box
         component="img"
-        alt="ABFS Device"
+        alt="Voting Device"
         src={require("../../assets/images/home/device.png")}
         maxHeight="50vh"
         maxWidth="90vw"
@@ -98,24 +98,22 @@ function BiometricScanners({ user }) {
 }
 
 function ScannerDetail({ scanner, index }) {
-  const { value: scannerDetail, error } = useDatabase(
-    "biometricScanners",
-    scanner.uid
+  const { value: reading, error } = useDatabase(
+    `devices/${scanner.uid}/reading`,
   );
 
-  const { value: scannerAttendance, error2 } = useDatabase(
-    "attendance",
-    scanner.uid
+  const { value: scannerData, error2 } = useDatabase(
+    `devices/${scanner.uid}/data`,
   );
 
-  console.log(scannerAttendance);
+  console.log(`devices/${scanner.uid}/reading`);
 
   const [isOnline, setIsOnline] = useState(false);
 
   useEffect(() => {
-    if (scannerDetail) {
+    if (reading) {
       if (
-        (Math.floor(new Date().getTime()) - scannerDetail.lastSeen) /
+        (Math.floor(new Date().getTime()) - reading.ts) /
           1000 /
           60 <
         1
@@ -123,11 +121,11 @@ function ScannerDetail({ scanner, index }) {
         setIsOnline(true);
       else setIsOnline(false);
     }
-  }, [scannerDetail]);
+  }, [reading]);
 
   return (
     <DropShadowBox>
-      {!scannerDetail && !error && <Typography>Loading...</Typography>}
+      {!reading && !error && <Typography>Loading...</Typography>}
       <Box
         sx={{
           display: "flex",
@@ -137,7 +135,7 @@ function ScannerDetail({ scanner, index }) {
         }}
       >
         <Typography variant="h5">Device {index + 1}</Typography>
-        {scannerDetail && (
+        {reading && (
           <DropShadowBox padding="2px 6px 2px 6px" marginTop="0px">
             <Typography
               variant="body2"
@@ -150,28 +148,43 @@ function ScannerDetail({ scanner, index }) {
       </Box>
       <Typography variant="body2">ID: {scanner.email}</Typography>
       {error || (error2 && <Alert severity="error">{error ?? error2}</Alert>)}
-      {scannerDetail && (
+      {reading && (
         <>
-          <Typography variant="body2">
-            Status: {scannerDetail.status}
+         <Typography variant="body2">
+            Total fingeres: {reading.fingerCount}
           </Typography>
           <Typography variant="body2">
-            LastSeen: {new Date(scannerDetail.lastSeen).toLocaleDateString()}
-            {", "} {new Date(scannerDetail.lastSeen).toLocaleTimeString()}
+            Last finger id: {reading.fingerID}
+          </Typography>
+          <Typography variant="body2">
+            Last finger confidenece: {reading.confidenece}
+          </Typography>
+          <Typography variant="body2">
+            Last selected key: {reading.keyIn}
+          </Typography>
+          <Typography variant="body2">
+            Enrollment status code: {reading.enrolStatus}
+          </Typography>
+          <Typography variant="body2">
+            LastSeen: {new Date(reading.ts).toLocaleDateString()}
+            {", "} {new Date(reading.ts).toLocaleTimeString()}
           </Typography>
         </>
       )}
 
-      {scannerAttendance && (
+      {scannerData && (
         <DropShadowBox>
-          <Typography variant="h6">Attendance</Typography>
+          <Typography variant="h6">Data</Typography>
           <Typography variant="body1">
-            User: {scannerDetail.data[scannerAttendance.id]}
+            Current mode: {scannerData.isEnrollment ? "Enrollment" : "Scanning"}
           </Typography>
-          <Typography variant="body2">
-            Time: {new Date(scannerAttendance.time).toLocaleDateString()} {", "}
-            {new Date(scannerAttendance.time).toLocaleTimeString()}
+          <Typography variant="body1">
+            Last enroller ID: {scannerData.fingerIdIn}
           </Typography>
+          {/* <Typography variant="body2">
+            Time: {new Date(scannerData.time).toLocaleDateString()} {", "}
+            {new Date(scannerData.time).toLocaleTimeString()}
+          </Typography> */}
         </DropShadowBox>
       )}
     </DropShadowBox>

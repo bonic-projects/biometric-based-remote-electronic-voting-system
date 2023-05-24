@@ -18,12 +18,14 @@ import Contact from "./pages/contact/Contact";
 import Admin from "./pages/admin/Admin";
 import BoothCreate from "./pages/booth_create/BoothCreate";
 import BoothList from "./pages/booth_view/BoothView";
-import ElectionStartPage from "./pages/start_election/StartElection";
+import ElectionForm from "./pages/start_election/StartElection";
+import ElectionList from "./pages/start_election/ElectionView";
+import EnrollVoterPage from "./pages/enrol/Enrol";
 
 let theme = createTheme({
   palette: {
     primary: {
-      main: "#212d3a",
+      main: "#057dff",
     },
     secondary: {
       main: "#0090e9",
@@ -91,7 +93,15 @@ function App() {
                 />
                 <Route
                   path="/election"
-                  element={user ? <ElectionStartPage /> : <Navigate to="/" />}
+                  element={user ? <ElectionList /> : <Navigate to="/" />}
+                />
+                <Route
+                  path="/election_create"
+                  element={user ? <ElectionForm /> : <Navigate to="/" />}
+                />
+                <Route
+                  path="/enrollment"
+                  element={user ? <EnrollVoterPage /> : <Navigate to="/" />}
                 />
               </Routes>
             </Layout>
